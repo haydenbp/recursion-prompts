@@ -6,17 +6,68 @@
 // denoted by n!, is the product of all positive integers less than or equal to n.
 // Example: 5! = 5 x 4 x 3 x 2 x 1 = 120
 // factorial(5); // 120
-var factorial = function(n) {
+var factorial = function(number) {
+    // If the number is negative, it doesn't have a factorial. Return an
+  // impossible value to indicate this.
+  if (number < 0) {
+    return null;
+  }
+
+  // If the number is zero, its factorial is one.
+  if (number === 0) {
+    return 1;
+  }
+
+  // If the number is neither illegal nor zero, call factorial again,
+  // this time passing in a smaller number. Eventually we'll reach 0,
+  // causing each call to return to its caller and the recursion terminates.
+  return (number * factorial(number - 1));
 };
 
 // 2. Compute the sum of an array of integers.
 // sum([1,2,3,4,5,6]); // 21
 var sum = function(array) {
+  if(array.length === 0){
+    return 0
+  }
+  if(array.length !== 1){
+   return sum([parseInt(array[0]) + parseInt(array[1])].concat (array.slice(2)))
+  } else {
+    return parseInt(array[0]);
+  }
+
 };
 
 // 3. Sum all numbers in an array containing nested arrays.
 // arraySum([1,[2,3],[[4]],5]); // 15
 var arraySum = function(array) {
+
+  console.log(array)
+
+  if(array.length === 0){
+    return 0
+  }
+  if(array.length !== 1){
+    if(typeof(array[0]) === Number && typeof(array[1]) === Number ){
+    return arraySum ([parseInt(array[0]) + parseInt(array[1])].concat(array.slice(2)))
+    }
+
+    if(Array.isArray(array[0]) && Array.isArray(array[1]) ){
+      return arraySum ([sum (array[0]) + sum (array[1])].concat (array.slice(2)))
+    }
+
+    if(Array.isArray(array[0]) && typeof(array[1]) === Number ){
+      return arraySum ([sum (array[0]) + parseInt(array[1])].concat (array.slice(2)))
+    }
+
+    if(Array.isArray(array[1]) && typeof(array[0]) === Number ){
+      return arraySum ([parseInt(array[0]) + sum(array[1])].concat (array.slice(2)))
+    }
+  }else {
+    //console.log(array)
+    return parsearray[0]
+  }
+
 };
 
 // 4. Check if a number is even.
